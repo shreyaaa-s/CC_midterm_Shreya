@@ -46,7 +46,7 @@ class People{
 		let rightBicepy = map(0.5,0,1,50+this.y,125+this.y); //half of the y distance of the right of the triangle
 
 		strokeWeight(4);
-		stroke(51);
+		stroke(200);
 		line(leftBicepx,leftBicepy,20+this.x,100+this.y); //first line of left arm
 		line(20+this.x,100+this.y,10+this.x,75+this.y); // second line of left arm
 
@@ -63,6 +63,7 @@ class People{
 	}
 
 	Head(){
+		stroke(51);
 		circle(50+this.x,50+this.y,40);
 	}
 

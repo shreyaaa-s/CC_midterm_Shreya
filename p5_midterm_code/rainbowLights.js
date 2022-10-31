@@ -8,5 +8,9 @@ class rainbowLights{
 		this.velocity = new createVector(1,1);
 	}
 
+	lightMove(){
+		
+	}
+
 
 }
