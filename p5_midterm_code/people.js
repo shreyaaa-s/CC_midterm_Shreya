@@ -1,70 +1,63 @@
 class People{
 
-	constructor(x,y){
-		this.x = x;
-		this.y = y;
+	constructor(){
+
 	}
 
 	triPerson(triX,triY){
 		
-		push();
-		translate(triX,triY);
-		this.triBody();
-		this.Arms();
-		this.Legs();
+		this.triBody(triX,triY);
+		this.Arms(triX,triY);
+		this.Legs(triX,triY);
 		fill(200);
-		this.Head();
-		pop();
+		this.Head(triX,triY);
 	}
 
 	rectPerson(rectX,rectY){
 		
-		push();
-		translate(rectX,rectY);
-		this.rectBody();
-		this.Arms();
-		this.Legs();
+		this.rectBody(rectX,rectY);
+		this.Arms(rectX,rectY);
+		this.Legs(rectX,rectY);
 		fill(200);
-		this.Head();
-		pop();
-	}
+		this.Head(rectX,rectY);
+		}
 
-	triBody(){
+	triBody(x,y){
 		noStroke();
-		triangle(50+this.x,50+this.y,25+this.x,125+this.y,75+this.x,125+this.y);
+		triangle(50+x,50+y,25+x,125+y,75+x,125+y);
 	}
 
-	rectBody(){
+	rectBody(x,y){
 		noStroke();
-		rect(35+this.x,70+this.y,30,55);
+		rect(35+x,70+y,30,55);
 	}
 
-	Arms(){
-		let leftBicepx = map(0.5,0,1,50+this.x,25+this.x); //half of the x distance of the left of the triangle
-		let leftBicepy = map(0.5,0,1,50+this.y,125+this.y); //half of the y distance of the left of the triangle
-		let rightBicepx = map(0.5,0,1,50+this.x,75+this.x); //half of the x distance of the right of the triangle
-		let rightBicepy = map(0.5,0,1,50+this.y,125+this.y); //half of the y distance of the right of the triangle
+	Arms(x,y){
+		let leftBicepx = map(0.5,0,1,50+x,25+x); //half of the x distance of the left of the triangle
+		let leftBicepy = map(0.5,0,1,50+y,125+y); //half of the y distance of the left of the triangle
+		let rightBicepx = map(0.5,0,1,50+x,75+x); //half of the x distance of the right of the triangle
+		let rightBicepy = map(0.5,0,1,50+y,125+y); //half of the y distance of the right of the triangle
 
 		strokeWeight(4);
 		stroke(200);
-		line(leftBicepx,leftBicepy,20+this.x,100+this.y); //first line of left arm
-		line(20+this.x,100+this.y,10+this.x,75+this.y); // second line of left arm
+		line(leftBicepx,leftBicepy,20+x,100+y); //first line of left arm
+		line(20+x,100+y,10+x,75+y); // second line of left arm
 
-		line(rightBicepx,rightBicepy,80+this.x,100+this.y); //first line of right arm
-		line(80+this.x,100+this.y,90+this.x,125+this.y) //second line of right arm
+		line(rightBicepx,rightBicepy,80+x,100+y); //first line of right arm
+		line(80+x,100+y,90+x,125+y) //second line of right arm
 	}
 
-	Legs(){
-		let leftLegx = map(3.3,0,10,25+this.x,75+this.x); //left leg starting position
-		let rightLegx = map(6.6,0,10,25+this.x,75+this.x); //right leg starting position
+	Legs(x,y){
+		let leftLegx = map(3.3,0,10,25+x,75+x); //left leg starting position
+		let rightLegx = map(6.6,0,10,25+x,75+x); //right leg starting position
 
-		line(leftLegx,125+this.y,leftLegx,150+this.y);
-		line(rightLegx,125+this.y,rightLegx,150+this.y);
+		line(leftLegx,125+y,leftLegx,150+y);
+		line(rightLegx,125+y,rightLegx,150+y);
 	}
 
-	Head(){
+	Head(x,y){
 		stroke(51);
-		circle(50+this.x,50+this.y,40);
+		circle(50+x,50+y,40);
 	}
 
 	dancePair(pairX,pairY){ //draws the people as a pair
@@ -87,9 +80,9 @@ class People{
 		// let moveDown = false;
 		// if(moveUp == true){
 			//for(let i = 0; i < 9; i++){
-			this.x = this.x+0.5;
-			// if(this.x >= 10){
-			// 	this.x = this.x-0.5;
+		//+x =+x+0.5;
+			// if+x >= 10){
+			// +x =+x-0.5;
 			// }
 		//}
 		// x
