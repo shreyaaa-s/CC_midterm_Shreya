@@ -16,6 +16,7 @@ class dayChange{
 
 	lightsMove(){
 		fill(random(0,225),random(0,225),random(0,225),60);
+		noStroke();
 		circle(this.position.x,this.position.y,80);
 		this.position.add(this.velocity);
 

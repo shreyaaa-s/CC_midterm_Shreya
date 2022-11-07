@@ -14,13 +14,20 @@ class People{
 	}
 
 	rectPerson(rectX,rectY){
-		
 		this.rectBody(rectX,rectY);
 		this.Arms(rectX,rectY);
 		this.Legs(rectX,rectY);
 		fill(200);
 		this.Head(rectX,rectY);
 		}
+
+	roundPerson(roundX,roundY){
+		this.roundBody(roundX+15,roundY+30);
+		this.Arms(roundX,roundY);
+		this.Legs(roundX,roundY);
+		fill(200);
+		this.Head(roundX,roundY);
+	}
 
 	triBody(x,y){
 		noStroke();
@@ -30,6 +37,11 @@ class People{
 	rectBody(x,y){
 		noStroke();
 		rect(35+x,70+y,30,55);
+	}
+
+	roundBody(x,y){
+		noStroke();
+		ellipse(35+x,70+y,30,60);
 	}
 
 	Arms(x,y){

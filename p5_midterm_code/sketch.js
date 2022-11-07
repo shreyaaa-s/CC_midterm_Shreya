@@ -1,12 +1,15 @@
 let person1;
 let person2;
 let personDuo;
+let mainPerson;
 let sunMoon;
+let building1;
 let perDuo;
-let per1;
-let per2;
-let cirX = 0;
-let count = 1;
+let mainInit;
+let xInc;
+let count;
+let scene = '1';
+let buildings = [];
 
 function setup(){
   createCanvas(800,800);
@@ -15,20 +18,47 @@ function setup(){
   person1 = new People();
   person2 = new People();
   personDuo = new People();
+  mainPerson = new People();
+  mainInit = new createVector(0,400);
+  building1 = new Buildings();
+  xInc = 10;
+  count = 1;
 
-
+  for(let i = 0; i < 8; i++){
+  	buildings[i] = new Buildings();
+  }
 }
 
 function draw(){
-	background(128,79,79);
-	//person1 = new Woman(mouseX,mouseY);
+	if(scene == '1'){
+		frameRate(6);
+		partyTime();
+	} else if(scene == '2'){
+		frameRate(60);
+		dayWSP();
+		mainPerson.roundPerson(mainInit.x,mainInit.y);
+		moveMain();
+	}
+}
+
+function partyTime(){
 	background(45, 35, 39);
 	peopleAtNight();
-	//movep();
-	//personDuo.dancePair(0,0);
-	// for (var i = 0; i < 800; i++) {
-	// 	circle(cirX + i, 60, 50);
-	// };
+	fill(255,0,0);
+	mainPerson.roundPerson(mainInit.x,mainInit.y);
+	moveMain();
+}
+
+function dayWSP(){
+	background(101,222,241);
+	for(let i = 0; i < buildings.length; i++){
+	buildings[i].makeBuilding(i);
+}
+}
+
+
+function dayTime(){
+
 }
 
 function peopleAtNight(){
@@ -45,7 +75,7 @@ function peopleAtNight(){
 	pop();
 	push();
 	frameRate(6);
-	for(let i = 0; i < 30; i++){
+	for(let i = 0; i < 50; i++){
 		sunMoon = new dayChange(0,0);
 		sunMoon.lightsMove();
 	}
@@ -54,16 +84,21 @@ function peopleAtNight(){
 
 
 
-function movep(){
-person1.personMove();
-	person1.triPerson(0,0);
+function moveMain(){
+	//frameRate(60);
+	mainInit.x = mainInit.x + xInc;
+
+	if(mainInit.x > 800) {
+    mainInit.x = 0;
+  }
+  //console.log(mainInit.x);
+
 }
 
-function nightLights(){
-
-}
-
-function mousePressed(){
-
-  
+function keyPressed() {
+  if (keyCode === 49) {
+    scene = '1';
+  } else if (keyCode === 50) {
+    scene = '2';
+  }
 }
