@@ -14,14 +14,23 @@ class Car{
 
 	carBody(x,y){
 		beginShape();
-		vertex(0+x,58+y,11+x,33+y);
-		vertex(11+x,33+y,43+x,33+y);
-		vertex(43+x,33+y,58+x,0+y);
-		vertex(58+x,0+y,142+x,0+y);
-		vertex(142+x,0+y,155+x,33+y);
-		vertex(155+x,33+y,188+x,33+y);
-		vertex(188+x,33+y,200+x,58+y);
-		vertex(200+x,58+y,0+x,58+y);
+		// line(0+x,58+y,11+x,33+y);
+		// line(11+x,33+y,43+x,33+y);
+		// line(43+x,33+y,58+x,0+y);
+		// line(58+x,0+y,142+x,0+y);
+		// line(142+x,0+y,155+x,33+y);
+		// line(155+x,33+y,188+x,33+y);
+		// line(188+x,33+y,200+x,58+y);
+		// line(200+x,58+y,0+x,58+y);
+
+		vertex(0+x,58+y);
+		vertex(11+x,33+y);
+		vertex(43+x,33+y);
+		vertex(58+x,0+y);
+		vertex(142+x,0+y);
+		vertex(155+x,33+y);
+		vertex(188+x,33+y);
+		vertex(200+x,58+y);
 		endShape();
 	}
 
@@ -39,7 +48,7 @@ class Car{
 	}
 
 	carColor(){
-		console.log(this.randCarCol);
+		//console.log(this.randCarCol);
 		if(this.randCarCol == 0){
 			fill(92, 27, 27);
 		} else if(this.randCarCol == 1){

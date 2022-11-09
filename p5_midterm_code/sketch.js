@@ -10,6 +10,7 @@ let xInc;
 let yInc;
 let countPeople;
 let countDay;
+let countDay2;
 let scene = '1';
 let buildings = [];
 let persons = [];
@@ -19,7 +20,10 @@ let b1;
 let peopleLoop;
 let concertPeopleLoop;
 let lightLoop;
-let cars = [];
+let carsLeft = [];
+let carsRight = [];
+let cityPeopleLeft = [];
+let cityPeopleRight = [];
 let concertPeople = [];
 let concertLights = [];
 let bounce;
@@ -29,6 +33,12 @@ let singer;
 let drummer;
 let guitarist;
 let lightSpeed;
+let leftX;
+let rightX;
+let leftPersonX;
+let rightPersonX;
+let leftDuoX;
+let rightDuoX;
 
 
 function setup(){
@@ -44,6 +54,7 @@ function setup(){
   yInc = 0;
   countPeople = 1;
   countDay = 1;
+  countDay2 = 0;
   r1 = 45;
   g1 = 35;
   b1 = 39;
@@ -54,6 +65,12 @@ function setup(){
   triY = 0;
   rectY = 0;
   lightSpeed = 1;
+  leftX = 1;
+  rightX = 1;
+  leftPersonX = 1;
+  rightPersonX = 1;
+  leftDuoX = 1;
+  rightDuoX = 1;
 
   singer = new People();
   drummer = new People();
@@ -63,8 +80,12 @@ function setup(){
   	buildings[i] = new Buildings();
   }
 
-  for(let i = 0; i < 10; i++){
-  	cars[i] = new Car();
+  for(let i = 0; i < 6; i++){
+  	carsLeft[i] = new Car();
+  }
+
+  for(let i = 0; i < 6; i++){
+  	carsRight[i] = new Car();
   }
 
   for(let i = 0; i < 50; i++){
@@ -74,15 +95,24 @@ function setup(){
   for(let i = 0; i < 50; i++){
   	concertLights[i] = new dayChange();
   }
+
+  for(let i = 0; i < 6; i++){
+  	cityPeopleLeft[i] = new People();
+  }
+
+  for(let i = 0; i < 6; i++){
+  	cityPeopleRight[i] = new People();
+  }
 }
 
 function draw(){
 	if(scene == '1'){
 		countDay = countDay +1;
 		partyTime();
-		carDrive();
 	} else if(scene == '2'){
 		dayWSP();
+		carDrive();
+		cityPeople();
 
 	} else if(scene == '3'){
 		concert();
@@ -171,7 +201,7 @@ function concertPeopleBounce(){ //creating and moving the people at the concert
 		concertPeople[i].concTriPerson(0,0);
 		fill(253, 167, 93);
 		concertPeople[i].concRectPerson(0,0);
-		console.log("is this even running");
+		//console.log("is this even running");
 	}
 	fill(50);
 	singer.roundPerson(360,280);
@@ -221,12 +251,21 @@ if(scene == '1'){
 	} else if(scene == '2'){
 		xInc = 3;
 		yInc = 0;
-		//mainInit.x = 0;
-		//mainInit.y = 700;
+		// mainInit.x = 0;
+		// mainInit.y = 700;
 		mainInit.x = mainInit.x + xInc;
+		if(mainInit.x >= width/2 && countDay2 < 100){
+			mainInit.x = 400;
+			countDay2 = countDay2 + 1;
+		} else if(countDay2 >= 100){
+				xInc = 1;
+				mainInit.x = mainInit.x + xInc;
+		}
+		console.log(countDay2);
 		// console.log(xInc);
 		// console.log(mainInit.x);
 	} else if(scene == '3'){
+
 		mainInit.x = mainInit.x + xInc;
 		if(mainInit.x >= width/2){
 			mainInit.x = 400;
@@ -246,10 +285,58 @@ if(scene == '1'){
 }
 
 function carDrive(){ //car moving scene
-	for(let i = 0; i < cars.length; i++){
-		cars[i].buildCar(-200,725);
+	for(let i = carsLeft.length - 1; i >= 0; i--){
+		carsLeft[i].buildCar(-200 + leftX,725);
+		leftX = leftX + 1;
+		//console.log(leftX);
+		if(leftX >= 1000){
+			leftX = 0;
+		}
+		//shuffle(carsLeft);
 	}
+	for(let i = 0; i < carsRight.length; i++){
+		carsRight[i].buildCar(800 - rightX,725);
+		rightX = rightX + 2;
+		if(rightX >= 1000){
+			rightX = 0;
+		}
+		//shuffle(carsRight);
+	}
+}
 
+function cityPeople(){ //the movement of the people in the city
+	for(let i = 0; i < cityPeopleLeft.length; i++){
+		fill(19, 196, 163);
+		cityPeopleLeft[i].triPerson(0 + leftPersonX,650);
+		leftPersonX = leftPersonX + 0.75;
+		if(leftPersonX >= 1000){
+			leftPersonX = 0;
+		}
+	}
+	for(let i = 0; i < cityPeopleRight.length; i++){
+		fill(253, 167, 93);
+		cityPeopleRight[i].rectPerson(800 - rightPersonX,650);
+		rightPersonX = rightPersonX + 0.5;
+		if(rightPersonX >= 1000){
+			rightPersonX = 0;
+		}
+	}
+	for(let i = 0; i < cityPeopleRight.length; i++){
+		fill(253, 167, 93);
+		cityPeopleRight[i].dancePair(800 - rightDuoX,650);
+		rightDuoX = rightDuoX + 0.75;
+		if(rightDuoX >= 1000){
+			rightDuoX = 0;
+		}
+	}
+	for(let i = 0; i < cityPeopleLeft.length; i++){
+		fill(253, 167, 93);
+		cityPeopleRight[i].dancePair(0 + leftDuoX,650);
+		leftDuoX = leftDuoX + 0.5;
+		if(leftDuoX >= 1000){
+			leftDuoX = 0;
+		}
+	}
 }
 
 function keyPressed() {

@@ -1,10 +1,10 @@
 class People{
 
 	constructor(){
-		this.concTriX = random(-50,800);
-		this.concTriY = random(450,800);
-		this.concRectX = random(-50,800);
-		this.concRectY = random(450,800);
+		this.concTriX = random(-50,750);
+		this.concTriY = random(450,780);
+		this.concRectX = random(-50,750);
+		this.concRectY = random(450,780);
 	}
 
 	triPerson(triX,triY){
