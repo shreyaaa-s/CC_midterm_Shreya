@@ -1,39 +1,52 @@
 class Car{
 	
 	constructor(){
+		this.randCarCol = int(random(0,3));
 	}
 
-	buildCar(){
+	buildCar(carX,carY){
 		strokeWeight(2);
-		this.carBody();
-		this.windows();
-		this.wheels();
+		this.carColor();
+		this.carBody(carX,carY);
+		this.windows(carX,carY);
+		this.wheels(carX,carY);
 	}
 
-	carBody(){
+	carBody(x,y){
 		beginShape();
-		line(0,58,11,33);
-		line(11,33,43,33);
-		line(43,33,58,0);
-		line(58,0,142,0);
-		line(142,0,155,33);
-		line(155,33,188,33);
-		line(188,33,200,58);
-		line(200,58,0,58);
+		vertex(0+x,58+y,11+x,33+y);
+		vertex(11+x,33+y,43+x,33+y);
+		vertex(43+x,33+y,58+x,0+y);
+		vertex(58+x,0+y,142+x,0+y);
+		vertex(142+x,0+y,155+x,33+y);
+		vertex(155+x,33+y,188+x,33+y);
+		vertex(188+x,33+y,200+x,58+y);
+		vertex(200+x,58+y,0+x,58+y);
 		endShape();
 	}
 
-	windows(){
+	windows(x,y){
 		fill(160, 227, 255, 70);
-		quad(51,29,62,5,82,5,82,29);
-		rect(88,5,28,24);
-		quad(121,29,121,5,138,5,149,29);
+		quad(51+x,29+y,62+x,5+y,82+x,5+y,82+x,29+y);
+		rect(88+x,5+y,28,24);
+		quad(121+x,29+y,121+x,5+y,138+x,5+y,149+x,29+y);
 	}
 
-	wheels(){
+	wheels(x,y){
 		fill(100);
-		circle(63,58,36);
-		circle(135,58,36);
+		circle(63+x,58+y,36);
+		circle(135+x,58+y,36);
+	}
+
+	carColor(){
+		console.log(this.randCarCol);
+		if(this.randCarCol == 0){
+			fill(92, 27, 27);
+		} else if(this.randCarCol == 1){
+			fill(15, 25, 54);
+		} else if (this.randCarCol == 2){
+			fill(22, 31, 23);
+		}
 	}
 
 

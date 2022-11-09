@@ -1,4 +1,4 @@
-class dayChange{	
+class dayChange{	 //class for the changing lights
 	constructor(x,y){
 		this.x = x;
 		this.y = y;
@@ -14,17 +14,17 @@ class dayChange{
 		circle(this.x,this.y,80);
 	}
 
-	lightsMove(){
+	lightsMove(x,y){
 		fill(random(0,225),random(0,225),random(0,225),60);
 		noStroke();
-		circle(this.position.x,this.position.y,80);
+		circle(this.position.x +x,this.position.y +y,80);
 		this.position.add(this.velocity);
+	}
 
-
-		// for(let i = 0; i < 30; i++){
-		// 	fill(random(0,225),random(0,225),random(0,225));
-		// 	noStroke();
-		// 	circle(cirX,cirY,60);
-		// 	}
+	lightsMoveConcert(y){
+		fill(random(0,225),random(0,225),random(0,225),60);
+		noStroke();
+		circle(this.circX,0 +y,80);
+		this.position.add(this.velocity);
 	}
 }

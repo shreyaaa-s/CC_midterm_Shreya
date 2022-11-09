@@ -1,11 +1,13 @@
 class People{
 
 	constructor(){
-
+		this.concTriX = random(-50,800);
+		this.concTriY = random(450,800);
+		this.concRectX = random(-50,800);
+		this.concRectY = random(450,800);
 	}
 
 	triPerson(triX,triY){
-		
 		this.triBody(triX,triY);
 		this.Arms(triX,triY);
 		this.Legs(triX,triY);
@@ -28,6 +30,23 @@ class People{
 		fill(200);
 		this.Head(roundX,roundY);
 	}
+
+	concTriPerson(x,y){
+		this.triBody(this.concTriX + x,this.concTriY + y);
+		this.Arms(this.concTriX + x,this.concTriY + y);
+		this.Legs(this.concTriX + x,this.concTriY + y);
+		fill(200);
+		this.Head(this.concTriX + x,this.concTriY + y);
+	}
+
+	concRectPerson(x,y){
+		this.rectBody(this.concRectX + x,this.concRectY + y);
+		this.Arms(this.concRectX + x,this.concRectY + y);
+		this.Legs(this.concRectX + x,this.concRectY + y);
+		fill(200);
+		this.Head(this.concRectX + x,this.concRectY + y);
+		}
+
 
 	triBody(x,y){
 		noStroke();

@@ -17,8 +17,18 @@ let r1;
 let g1;
 let b1;
 let peopleLoop;
+let concertPeopleLoop;
 let lightLoop;
-let car1;
+let cars = [];
+let concertPeople = [];
+let concertLights = [];
+let bounce;
+let triY;
+let rectY;
+let singer;
+let drummer;
+let guitarist;
+let lightSpeed;
 
 
 function setup(){
@@ -29,7 +39,7 @@ function setup(){
   mainPerson = new People();
   mainInit = new createVector(0,0);
   building1 = new Buildings();
-  car1 = new Car();
+  instrument = new Instruments();
   xInc = 0;
   yInc = 0;
   countPeople = 1;
@@ -39,9 +49,30 @@ function setup(){
   b1 = 39;
   peopleLoop = 15;
   lightLoop = 50;
+  concertPeopleLoop = 0;
+  bounce = 5;
+  triY = 0;
+  rectY = 0;
+  lightSpeed = 1;
+
+  singer = new People();
+  drummer = new People();
+  guitarist = new People();
 
   for(let i = 0; i < 8; i++){
   	buildings[i] = new Buildings();
+  }
+
+  for(let i = 0; i < 10; i++){
+  	cars[i] = new Car();
+  }
+
+  for(let i = 0; i < 50; i++){
+  	concertPeople[i] = new People();
+  }
+
+  for(let i = 0; i < 50; i++){
+  	concertLights[i] = new dayChange();
   }
 }
 
@@ -49,17 +80,16 @@ function draw(){
 	if(scene == '1'){
 		countDay = countDay +1;
 		partyTime();
-		  car1.buildCar();
-
+		carDrive();
 	} else if(scene == '2'){
-		//frameRate(60);
 		dayWSP();
-		  car1.buildCar();
 
+	} else if(scene == '3'){
+		concert();
 	}
 }
 
-function partyTime(){
+function partyTime(){ //party scene
 	countPeople = countPeople +1;
 	if(countPeople%10 == 0){
 		background(r1, g1, b1);
@@ -84,7 +114,7 @@ function partyTime(){
 	moveMain();
 }
 
-function dayWSP(){
+function dayWSP(){ //day scene
 	background(101,222,241);
 	for(let i = 0; i < buildings.length; i++){
 	buildings[i].makeBuilding(i);
@@ -95,7 +125,7 @@ function dayWSP(){
 }
 
 
-function peopleAtNight(){
+function peopleAtNight(){ //people at the party scene
 	//frameRate(1);
 	for(let i = 0; i < peopleLoop; i++){
 		persons.dancePair(random(-50,800),random(-50,800));
@@ -103,14 +133,76 @@ function peopleAtNight(){
 		persons.triPerson(random(-50,800),random(-50,800));
 		fill(253, 167, 93);
 		persons.rectPerson(random(-50,800),random(-50,800));
-}
+	}
 
 	//frameRate(6);
 	for(let i = 0; i < lightLoop; i++){
 		sunMoon = new dayChange(0,0);
-		sunMoon.lightsMove();
+		sunMoon.lightsMove(0,0);
 	}
+}
 
+function concert(){ //concert scene
+	background(45, 35, 39);
+	noStroke();
+	fill(69, 54, 75);
+	rect(0,0,800,500);
+	stroke(225, 207, 168);
+	line(0,500,800,500);
+
+	noStroke();
+	concertPeopleBounce();
+
+	instrument.drum();
+	instrument.guitar();
+	instrument.microphone();
+
+
+
+	fill(255,0,0);
+	mainPerson.roundPerson(mainInit.x,mainInit.y);
+	moveMain();
+}
+
+function concertPeopleBounce(){ //creating and moving the people at the concert
+	if(mainInit.x < 400){
+	for(let i = 0; i < concertPeople.length; i++){
+		fill(19, 196, 163);
+		concertPeople[i].concTriPerson(0,0);
+		fill(253, 167, 93);
+		concertPeople[i].concRectPerson(0,0);
+		console.log("is this even running");
+	}
+	fill(50);
+	singer.roundPerson(360,280);
+	fill(0);
+	drummer.roundPerson(100,200);
+	fill(25);
+	guitarist.roundPerson(650,200);
+
+	} else if(mainInit.x >= 400){
+		lightLoop = 0;
+		for(let i = 0; i < concertPeople.length; i++){
+		fill(19, 196, 163);
+		concertPeople[i].concTriPerson(0,random(0,15));
+		fill(253, 167, 93);
+		concertPeople[i].concRectPerson(0,random(0,15));
+	}
+	fill(50);
+	singer.roundPerson(360,280 + random(0,15));
+	fill(0);
+	drummer.roundPerson(100,200 + random(0,15));
+	fill(25);
+	guitarist.roundPerson(650,200 + random(0,15));
+
+	for(let i = 0; i < concertLights.length; i++){
+		concertLights[i].lightsMoveConcert(lightSpeed);
+		lightSpeed = lightSpeed + random(0,1);
+		if(lightSpeed >= 800){
+			lightSpeed = 0;
+		}
+	}
+}
 }
 
 
@@ -132,17 +224,31 @@ if(scene == '1'){
 		//mainInit.x = 0;
 		//mainInit.y = 700;
 		mainInit.x = mainInit.x + xInc;
-		console.log(xInc);
-		console.log(mainInit.x);
+		// console.log(xInc);
+		// console.log(mainInit.x);
+	} else if(scene == '3'){
+		mainInit.x = mainInit.x + xInc;
+		if(mainInit.x >= width/2){
+			mainInit.x = 400;
+		}
+	}
 
-	}	
-
-	if(mainInit.x > 800) {
-    mainInit.x = 0;
-    mainInit.y = 650;
-    scene = '2';
+	if(mainInit.x > 800 && scene == '1') {
+	    mainInit.x = 0;
+	    mainInit.y = 650;
+	    scene = '2';
+  } else if (mainInit.x > 800 && scene == '2'){
+  		mainInit.x = 0;
+	    mainInit.y = 650;
+  		scene = '3';
   }
   //console.log(mainInit.x);
+}
+
+function carDrive(){ //car moving scene
+	for(let i = 0; i < cars.length; i++){
+		cars[i].buildCar(-200,725);
+	}
 
 }
 
