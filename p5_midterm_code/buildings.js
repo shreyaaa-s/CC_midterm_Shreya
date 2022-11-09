@@ -28,7 +28,7 @@ class Buildings{
 			fill(200,195,190);
 			this.buildingHeight = 150; //tallest building
 		}
-		console.log(this.heightVar);
+		//console.log(this.heightVar);
 	}
 
 	windows(winX){
