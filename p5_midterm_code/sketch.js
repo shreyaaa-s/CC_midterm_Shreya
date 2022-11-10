@@ -1,10 +1,6 @@
-let person1;
-let person2;
-let personDuo;
 let mainPerson;
 let sunMoon;
 let building1;
-let perDuo;
 let mainInit;
 let xInc;
 let yInc;
@@ -26,6 +22,7 @@ let cityPeopleLeft = [];
 let cityPeopleRight = [];
 let concertPeople = [];
 let concertLights = [];
+let cityLights = [];
 let bounce;
 let triY;
 let rectY;
@@ -94,6 +91,10 @@ function setup(){
 
   for(let i = 0; i < 50; i++){
   	concertLights[i] = new dayChange();
+  }
+
+  for(let i = 0; i < 50; i++){
+  	cityLights[i] = new dayChange();
   }
 
   for(let i = 0; i < 6; i++){
@@ -174,6 +175,7 @@ function peopleAtNight(){ //people at the party scene
 
 function concert(){ //concert scene
 	background(45, 35, 39);
+	fill(255, 205, 54);
 	noStroke();
 	fill(69, 54, 75);
 	rect(0,0,800,500);
@@ -261,7 +263,6 @@ if(scene == '1'){
 				xInc = 1;
 				mainInit.x = mainInit.x + xInc;
 		}
-		console.log(countDay2);
 		// console.log(xInc);
 		// console.log(mainInit.x);
 	} else if(scene == '3'){
@@ -337,12 +338,12 @@ function cityPeople(){ //the movement of the people in the city
 			leftDuoX = 0;
 		}
 	}
-}
 
-function keyPressed() {
-  if (keyCode === 49) {
-    scene = '1';
-  } else if (keyCode === 50) {
-    scene = '2';
-  }
+	for(let i = 0; i < cityLights.length; i++){
+		cityLights[i].lightsMoveCity(0,0);
+		lightSpeed = lightSpeed + random(0,1);
+		if(lightSpeed >= 800){
+			lightSpeed = 0;
+		}
+	}
 }

@@ -8,6 +8,7 @@ class Buildings{
 	makeBuilding(x){
 		this.heightBuild(); //calling the method that gives the neight of the building
 		strokeWeight(2);
+		stroke(0);
 		rect(this.buildingX * x,this.buildingHeight,125,height-this.buildingHeight)
 		strokeWeight(1);
 		this.windows(x);
